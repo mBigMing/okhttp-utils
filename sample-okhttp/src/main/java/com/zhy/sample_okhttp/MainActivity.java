@@ -1,5 +1,6 @@
 package com.zhy.sample_okhttp;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
@@ -17,6 +18,7 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.BitmapCallback;
 import com.zhy.http.okhttp.callback.FileCallBack;
 import com.zhy.http.okhttp.callback.StringCallback;
+import com.zhy.sample_okhttp.test.HttpsActivity;
 
 import java.io.File;
 import java.util.HashMap;
@@ -134,17 +136,14 @@ public class MainActivity extends AppCompatActivity
                 .addParams("username", "hyman")//
                 .addParams("password", "123")//
                 .build()//
-                .execute(new UserCallback()
-                {
+                .execute(new UserCallback() {
                     @Override
-                    public void onError(Request request, Exception e)
-                    {
+                    public void onError(Request request, Exception e) {
                         mTv.setText("onError:" + e.getMessage());
                     }
 
                     @Override
-                    public void onResponse(User response)
-                    {
+                    public void onResponse(User response) {
                         mTv.setText("onResponse:" + response.username);
                     }
                 });
@@ -202,17 +201,14 @@ public class MainActivity extends AppCompatActivity
                 .connTimeOut(20000)
                 .readTimeOut(20000)
                 .writeTimeOut(20000)
-                .execute(new BitmapCallback()
-                {
+                .execute(new BitmapCallback() {
                     @Override
-                    public void onError(Request request, Exception e)
-                    {
+                    public void onError(Request request, Exception e) {
                         mTv.setText("onError:" + e.getMessage());
                     }
 
                     @Override
-                    public void onResponse(Bitmap bitmap)
-                    {
+                    public void onResponse(Bitmap bitmap) {
                         mImageView.setImageBitmap(bitmap);
                     }
                 });
@@ -306,6 +302,10 @@ public class MainActivity extends AppCompatActivity
                         Log.e(TAG, "onResponse :" + file.getAbsolutePath());
                     }
                 });
+    }
+
+    public void httpsActivity(View v){
+        startActivity(new Intent(this, HttpsActivity.class));
     }
 
     @Override

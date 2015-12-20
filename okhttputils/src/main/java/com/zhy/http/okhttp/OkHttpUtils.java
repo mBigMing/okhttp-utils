@@ -149,11 +149,9 @@ public class OkHttpUtils
     {
         if (callback == null) return;
 
-        mDelivery.post(new Runnable()
-        {
+        mDelivery.post(new Runnable() {
             @Override
-            public void run()
-            {
+            public void run() {
                 callback.onError(request, e);
                 callback.onAfter();
             }
@@ -185,6 +183,9 @@ public class OkHttpUtils
         HttpsUtils.setCertificates(getOkHttpClient(), certificates, null, null);
     }
 
+    public void setCertificates(InputStream bksFile, String password, InputStream... certificates){
+        HttpsUtils.setCertificates(getOkHttpClient(), certificates, bksFile, password);
+    }
 
 }
 
